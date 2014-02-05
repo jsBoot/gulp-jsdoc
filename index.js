@@ -58,6 +58,7 @@
         path: path.join(firstFile.base, name),
         contents: new Buffer(data)
       });
+
       // Possibly stack-up the readme, if there was any in the first place
       vinyl.readme = readme;
 
@@ -75,7 +76,14 @@
     var gp = new Generator(destination, template, options);
 
     var processor = function(file, enc, next){
-      gp.render(file);
+      if (file.isNull()) return; // ignore
+      if (file.isStream()) return this.emit('error', new PluginError('gulp-jsdoc',  'Streaming not supported'));
+      try{
+        gp.render(file);
+      }catch(e){
+        return this.emit('error', new PluginError('gulp-jsdoc',
+          'Oooooh! Failed rendering with jsdoc. What did you do?! ' + e));
+      }
       next();
     };
 
