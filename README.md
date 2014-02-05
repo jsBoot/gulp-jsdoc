@@ -39,7 +39,7 @@ gulp.src("./src/*.js")
 ```javascript
 gulp.src("./src/*.js")
   .pipe(jsdoc.parser(infos, name))
-  .pipe(dest('./somewhere'))
+  .pipe(gulp.dest('./somewhere'))
 ```
 
 Will process any files it has been fed, and generate a new vinyl JSON usable by the generator to produce actual documentation.
@@ -53,7 +53,7 @@ eg:
 ```javascript
 gulp.src(["./src/*.js", "README.md"])
   .pipe(jsdoc.parser(infos, name))
-  .pipe(dest('./somewhere'))
+  .pipe(gulp.dest('./somewhere'))
 ```
 
 The optional infos parameter is fed to jsdoc.
