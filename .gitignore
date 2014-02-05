@@ -1,0 +1,20 @@
+# System
+.DS_Store
+
+# Build systems
+dependencies
+node_modules
+coverage
+
+# IDE
+*.sublime-workspace
+
+# Build scories
+*.py[co]
+*.egg
+*.egg-info
+
+# Oldies
+*xxx*
+
+/*.log
