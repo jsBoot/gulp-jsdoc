@@ -50,7 +50,7 @@
 
       var data;
       try{
-        data = JSON.stringify(wp.complete());
+        data = JSON.stringify(wp.complete(), null, 2);
         // data = parser(options, filemap));
       }catch(e){
         return this.emit('error', new PluginError('gulp-jsdoc',
