@@ -9,7 +9,6 @@ This is an early release - if you find bugs, please say so.
 
 Also, the following are currently not supported:
 
- * plugins
  * tutorials
  * configuration from jsdoc.conf files
 
@@ -73,6 +72,13 @@ Default: `''`
 #### infos.licenses
 Type: `Array`  
 Default: `[]`
+
+#### infos.plugins
+Type: `Array`  
+Default: `false`
+
+jsDoc plugins to use. Example: `['plugins/markdown']`
+
 
 ### jsdoc.generator(destination, template, options)
 
