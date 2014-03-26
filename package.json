@@ -1,6 +1,6 @@
 {
   "name": "gulp-jsdoc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A jsdoc plugin for Gulp",
   "keywords": [
     "gulpplugin",
@@ -63,5 +63,4 @@
     "npm": ">=1.0.0"
   },
   "private": false
-
 }
