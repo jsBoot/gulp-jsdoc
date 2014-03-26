@@ -3,18 +3,6 @@
 
 > jsdoc plugin for [gulp](https://github.com/wearefractal/gulp)
 
-WARNING
--------------
-
-This is an early release - if you find bugs, please say so.
-
-Also, the following are currently not supported:
-
- * tutorials
- * configuration from jsdoc.conf files
-
-If you have a use-case that you can't do with straight gulp in a better way, please say so.
-
 TL;DR
 -------------
 
@@ -24,7 +12,7 @@ Install `gulp-jsdoc` as a development dependency:
 npm install --save-dev gulp-jsdoc
 ```
 
-Then, add it to your `gulpfile.js`:
+Then, use it:
 
 ```javascript
 var jsdoc = require("gulp-jsdoc");
@@ -170,9 +158,16 @@ gulp.src(["./src/*.js", "README.md"])
 Limitations
 -------------
 
-Only the parser is really using streams. While the generator will read from the result of the parser, it will also read and write templates files on its own.
+Only the parser is really using streams. While the generator will read from the result of the parser, it will also read and write templates files synchronously on its own.
 
 There is nothing we can do about that, unless changing the jsdoc templating API entirely, and all existing templates...
+
+Also, the following are currently not supported:
+
+ * tutorials
+ * sourcing configuration from jsdoc.conf files
+
+If you have a use-case that you can't do with straight gulp in a better way, please say so.
 
 License
 -------------
