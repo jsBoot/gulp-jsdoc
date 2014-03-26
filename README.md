@@ -191,5 +191,5 @@ License
 [depstat-url]: https://david-dm.org/jsBoot/gulp-jsdoc
 [depstat-image]: https://david-dm.org/jsBoot/gulp-jsdoc.png
 
-[codeclimate-url]: https://codeclimate.com/github/jsBoot/gulp-jsdoc.js
+[codeclimate-url]: https://codeclimate.com/github/jsBoot/gulp-jsdoc
 [codeclimate-image]: https://codeclimate.com/github/jsBoot/gulp-jsdoc.png
