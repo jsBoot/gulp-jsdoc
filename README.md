@@ -1,9 +1,10 @@
 # gulp-jsdoc
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Code Climate][codeclimate-image]][codeclimate-url]
 
 > jsdoc plugin for [gulp](https://github.com/wearefractal/gulp)
 
-## WARNING
+WARNING
+-------------
 
 This is an early release - if you find bugs, please say so.
 
@@ -14,7 +15,8 @@ Also, the following are currently not supported:
 
 If you have a use-case that you can't do with straight gulp in a better way, please say so.
 
-## TL;DR
+TL;DR
+-------------
 
 Install `gulp-jsdoc` as a development dependency:
 
@@ -31,7 +33,8 @@ gulp.src("./src/*.js")
   .pipe(jsdoc('./documentation-output'))
 ```
 
-## API
+API
+-------------
 
 ### jsdoc.parser(infos, name)
 
@@ -110,8 +113,8 @@ You may optionnally specify a custom template, using the following syntax
 
 ```
 {
-	path: 'path_to_template',
-	anyTemplateSpecificParameter: 'whatever'
+  path: 'path_to_template',
+  anyTemplateSpecificParameter: 'whatever'
 }
 ```
 
@@ -164,13 +167,15 @@ gulp.src(["./src/*.js", "README.md"])
 ```
 
 
-## Limitations
+Limitations
+-------------
 
 Only the parser is really using streams. While the generator will read from the result of the parser, it will also read and write templates files on its own.
 
 There is nothing we can do about that, unless changing the jsdoc templating API entirely, and all existing templates...
 
-## License
+License
+-------------
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
@@ -185,3 +190,6 @@ There is nothing we can do about that, unless changing the jsdoc templating API 
 
 [depstat-url]: https://david-dm.org/jsBoot/gulp-jsdoc
 [depstat-image]: https://david-dm.org/jsBoot/gulp-jsdoc.png
+
+[codeclimate-url]: https://codeclimate.com/github/jsBoot/gulp-jsdoc.js
+[codeclimate-image]: https://codeclimate.com/github/jsBoot/gulp-jsdoc.png
