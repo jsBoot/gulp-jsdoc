@@ -131,7 +131,7 @@ You may optionnally override default jsdoc behavior with this object:
 
 ```
   {
-    'private': false,
+    showPrivate: false,
     monospaceLinks: false,
     cleverLinks: false,
     outputSourceFiles: true
