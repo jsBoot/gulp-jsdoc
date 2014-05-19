@@ -39,7 +39,7 @@
   var pkg = require('./package.json');
 
   var opts = {
-    'private': true,
+    showPrivate: true,
     monospaceLinks: true,
     cleverLinks: true,
     outputSourceFiles: true
