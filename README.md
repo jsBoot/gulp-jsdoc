@@ -3,6 +3,18 @@
 
 > jsdoc plugin for [gulp](https://github.com/wearefractal/gulp)
 
+BIG FAT WARNING
+-------------
+
+jsdoc is currently (alpha5+) going through important inner modifications.
+Also, jsdoc has an history at doing quesitonable things (certainly, at least in part, due to its desire to support alternative javascript engines like Rhino), including, not limited to, hard copying files into the module folder at runtime (templates), and using non standard require calls and paths.
+Finally, jsdoc really is not meant to be used as a library. It provides a cli, and little more, with no clean/stable library API.
+
+All in all, maintaining a working "true" gulp plugin (one that uses streams and does not simply call a binary) proved to be a very painful task, with ultimately little benefit, as I stopped using jsdoc altogether for my own uses.
+
+For all these reasons, I decided to stop maintaining this plugin, and won't work on it until at least a new jsdoc stable version is released.
+If you still use it and have a PR, I'll review it though.
+
 TL;DR
 -------------
 
