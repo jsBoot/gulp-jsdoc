@@ -10,7 +10,6 @@
   var jshint = require('gulp-jshint');
 
   var jsreporter = require('jshint-stylish');
-  var esreporter = require('eslint-stylish');
 
   var fs = require('fs');
   var jsconfig = JSON.parse(fs.readFileSync('./.jshintrc'));
@@ -24,7 +23,7 @@
     ])
     .pipe(gutil.combine(
       eslint(esconfig),
-      eslint.formatEach(esreporter),
+      eslint.format(),
       jshint(jsconfig),
       jshint.reporter(jsreporter)
     )());
