@@ -89,7 +89,7 @@
     "no-native-reassign": 2,
     "no-negated-in-lhs": 2,
 
-    "no-new-array": 2,
+    "no-array-constructor": 2,
     "no-new-func": 2,
     "no-new-object": 2,
     "no-new-wrappers": 2,
@@ -122,7 +122,7 @@
     "quote-props": 0,
     "quotes": [2, "single"],
     "radix": 1,
-    "regex-spaces": 1,
+    "no-regex-spaces": 1,
     "semi": 1,
 
 
