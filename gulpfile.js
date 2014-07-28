@@ -73,7 +73,8 @@
   gulp.task('doc-simple', function() {
     gulp.src([
       'index.js',
-      'lib/**/*.js'
+      'lib/**/*.js',
+      'testjs/**/*.js'
     ])
     // Process source files first
     .pipe(template({pkg: pkg}))

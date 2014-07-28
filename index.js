@@ -10,6 +10,15 @@
 
   var marked = require('marked');
 
+  /**
+   * Add jsdoc to node_module path to make new version(3.3.0-alpha9) run
+   */
+  var path = require('path');
+  require = require('requizzle')({
+    requirePaths: [path.join(__dirname, 'node_modules/jsdoc/lib')],
+    infect: true
+  })
+
   var Parser = require('./lib/parser.js');
   var Generator = require('./lib/generator.js');
 
