@@ -36,7 +36,6 @@
     "ink-docstrap": "~0.4.5",
     "jsdoc": "3.3.0-alpha9",
     "marked": "~0.3.1",
-    "path": "^0.4.9",
     "requizzle": "^0.2.0",
     "taffydb": "~2.7.2",
     "text-table": "~0.2.0",
