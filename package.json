@@ -39,8 +39,8 @@
     "jsdoc": "3.3.0-alpha9",
     "taffydb": "~2.7.2",
     "ink-docstrap": "~0.4.5",
-    "marked": "~0.3.1",
     "wrench": "~1.5.6",
+    "marked": "~0.3.1",
     "requizzle": "^0.2.0"
   },
   "devDependencies": {
