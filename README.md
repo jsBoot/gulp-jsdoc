@@ -122,8 +122,8 @@ As a courtesy, gulp-jsdoc bundles ink-docstrap templates, that you may use direc
 
 ```
 {
-    path: 'ink-docstrap',
-    systemName      : 'Something'',
+    path            : "ink-docstrap",
+    systemName      : "Something",
     footer          : "Something",
     copyright       : "Something",
     navType         : "vertical",
