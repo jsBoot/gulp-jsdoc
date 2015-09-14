@@ -38,7 +38,7 @@
     "vinyl-fs": "~0.3.0",
     "jsdoc": "3.3.0-alpha5",
     "taffydb": "~2.7.2",
-    "ink-docstrap": "~0.4.5",
+    "ink-docstrap": "git://github.com/terryweiss/docstrap.git#v0.5.0",
     "wrench": "~1.5.6",
     "marked": "~0.3.1"
   },
