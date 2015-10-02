@@ -31,16 +31,16 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "through2": "^1.0.0",
-    "gulp-util": "~2.2.14",
     "chalk": "~0.4.0",
-    "text-table": "~0.2.0",
-    "vinyl-fs": "~0.3.0",
-    "jsdoc": "3.3.0-alpha5",
-    "taffydb": "~2.7.2",
+    "gulp-util": "~2.2.14",
     "ink-docstrap": "~0.4.5",
-    "wrench": "~1.5.6",
-    "marked": "~0.3.1"
+    "jsdoc": "^3.3.3",
+    "marked": "~0.3.1",
+    "taffydb": "~2.7.2",
+    "text-table": "~0.2.0",
+    "through2": "^1.0.0",
+    "vinyl-fs": "~0.3.0",
+    "wrench": "~1.5.6"
   },
   "devDependencies": {
     "mocha": "^1.17.1",
