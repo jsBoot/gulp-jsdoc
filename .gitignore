@@ -1,20 +1,8 @@
-# System
-.DS_Store
-
-# Build systems
-dependencies
 node_modules
+.idea
+
+dist
+docs/gen
 coverage
-
-# IDE
-*.sublime-workspace
-
-# Build scories
-*.py[co]
-*.egg
-*.egg-info
-
-# Oldies
-*xxx*
-
-/*.log
+npm-debug.log
+coverage
