@@ -1,22 +1,9 @@
 # gulp-jsdoc
+
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Code Climate][codeclimate-image]][codeclimate-url]
 
-> jsdoc plugin for [gulp](https://github.com/wearefractal/gulp)
+> [jsdoc](https://github.com/jsdoc/jsdoc) plugin for [gulp](https://github.com/gulpjs/gulp)
 
-BIG FAT WARNING
--------------
-
-jsdoc is currently (alpha5+) going through important inner modifications.
-Also, jsdoc has an history at doing quesitonable things (certainly, at least in part, due to its desire to support alternative javascript engines like Rhino), including, not limited to, hard copying files into the module folder at runtime (templates), and using non standard require calls and paths.
-Finally, jsdoc really is not meant to be used as a library. It provides a cli, and little more, with no clean/stable library API.
-
-All in all, maintaining a working "true" gulp plugin (one that uses streams and does not simply call a binary) proved to be a very painful task, with ultimately little benefit, as I stopped using jsdoc altogether for my own uses.
-
-For all these reasons, I decided to stop maintaining this plugin, and won't work on it until at least a new jsdoc stable version is released.
-If you still use it and have a PR, I'll review it though.
-
-TL;DR
--------------
 
 Install `gulp-jsdoc` as a development dependency:
 
@@ -24,179 +11,47 @@ Install `gulp-jsdoc` as a development dependency:
 npm install --save-dev gulp-jsdoc
 ```
 
-Then, use it:
+Then, use it where config is the only way to pass in jsdoc options. All CLI options are can be specified here,
+the only exception is ink-docstrap is bundled here and used for templating.
 
 ```javascript
-var jsdoc = require("gulp-jsdoc");
+var jsdoc = require('gulp-jsdoc');
 
-gulp.src("./src/*.js")
-  .pipe(jsdoc('./documentation-output'))
+gulp.task('doc', function (cb) {
+    gulp.src(['README.md', './src/**/*.js'], {read: false})
+        .pipe(jsdoc(config, cb));
+});
 ```
 
-API
--------------
+Another good example is in this project's [gulpfile](https://github.com/mlucool/gulp-jsdoc/blob/master/gulpfile.js)!
 
-### jsdoc.parser(infos, name)
+## Debugging
+Set env variable: ```DEBUG=gulp-jsdoc```  
 
-```javascript
-gulp.src("./src/*.js")
-  .pipe(jsdoc.parser(infos, name))
-  .pipe(gulp.dest('./somewhere'))
-```
-
-Will process any files it has been fed, and generate a new vinyl JSON usable by the generator to produce actual documentation.
-
-By default, the filename is 'jsdoc.json' unless overriden by the name parameter.
-
-Note that if you feed the parser a README.md file, this file will be rendered and used as a long description for your package.
-
-eg:
-
-```javascript
-gulp.src(["./src/*.js", "README.md"])
-  .pipe(jsdoc.parser(infos, name))
-  .pipe(gulp.dest('./somewhere'))
-```
-
-The optional infos parameter is fed to jsdoc.
-
-#### infos.name
-Type: `String`  
-Default: `''`
-
-#### infos.description
-Type: `String`  
-Default: `''`
-
-#### infos.version
-Type: `String`  
-Default: `''`
-
-#### infos.licenses
-Type: `Array`  
-Default: `[]`
-
-#### infos.plugins
-Type: `Array`  
-Default: `false`
-
-jsDoc plugins to use. Example: `['plugins/markdown']`
+## Notes
+This is a reasonable attempt to wrap jsdoc using gulp as thinly as possible. All files are added after the cli.
+i.e. jsdoc -c config -t node_modules/ink-docstrap/template gulpFile1 gulpFile2  
+[jsdoc](https://github.com/jsdoc/jsdoc) does not allow for piped input, so this attempt may be considered a gulp
+anti-pattern. It also does not pass on output to be piped elsewhere.
 
 
-### jsdoc.generator(destination, template, options)
-
-```javascript
-gulp.src("./somewhere/jsdoc.json")
-  .pipe(jsdoc.generator('./destination'))
-```
-
-or directly from the parser pipe:
-
-```javascript
-gulp.src(["./src/*.js", "README.md"])
-  .pipe(jsdoc.parser(infos, name))
-  .pipe(jsdoc.generator('./destination'))
-```
-
-By default, the generator uses the default template.
-
-#### destination
-Type: `String`  
-Default: `''`
-
-Where the documentation will be outputed.
-If an infos object with a version / name was provided to the parser, these will be used in the final path.
-
-#### template
-
-You may optionnally specify a custom template, using the following syntax
-
-```
-{
-  path: 'path_to_template',
-  anyTemplateSpecificParameter: 'whatever'
-}
-```
-
-As a courtesy, gulp-jsdoc bundles ink-docstrap templates, that you may use directly this way:
-
-```
-{
-    path            : "ink-docstrap",
-    systemName      : "Something",
-    footer          : "Something",
-    copyright       : "Something",
-    navType         : "vertical",
-    theme           : "journal",
-    linenums        : true,
-    collapseSymbols : false,
-    inverseNav      : false
-  }
-```
-
-See [their site](https://github.com/terryweiss/docstrap) for more infos.
-
-
-#### options
-
-You may optionnally override default jsdoc behavior with this object:
-
-```
-  {
-    showPrivate: false,
-    monospaceLinks: false,
-    cleverLinks: false,
-    outputSourceFiles: true
-  }
- ```
-
-
-### jsdoc(destination, template, infos, options)
-
-```javascript
-gulp.src(["./src/*.js", "README.md"])
-  .pipe(jsdoc('./destination'))
-```
-
-... is simply a shortcut for
-
-```javascript
-gulp.src(["./src/*.js", "README.md"])
-  .pipe(jsdoc.parser())
-  .pipe(jsdoc.generator('./destination'))
-```
-
-
-Limitations
--------------
-
-Only the parser is really using streams. While the generator will read from the result of the parser, it will also read and write templates files synchronously on its own.
-
-There is nothing we can do about that, unless changing the jsdoc templating API entirely, and all existing templates...
-
-Also, the following are currently not supported:
-
- * tutorials
- * sourcing configuration from jsdoc.conf files
-
-If you have a use-case that you can't do with straight gulp in a better way, please say so.
+I would like to thank Mangled Deutz @ [gulp-jsdoc](https://github.com/jsBoot/gulp-jsdoc) for the original implimentation.
 
 License
 -------------
-
-[MIT License](http://en.wikipedia.org/wiki/MIT_License)
+[Apache-2.0 License](http://www.apache.org/licenses/LICENSE-2.0)
 
 [npm-url]: https://npmjs.org/package/gulp-jsdoc
 [npm-image]: https://badge.fury.io/js/gulp-jsdoc.png
 
-[travis-url]: http://travis-ci.org/jsBoot/gulp-jsdoc
-[travis-image]: https://secure.travis-ci.org/jsBoot/gulp-jsdoc.png?branch=master
+[travis-url]: http://travis-ci.org/mlucool/gulp-jsdoc
+[travis-image]: https://secure.travis-ci.org/mlucool/gulp-jsdoc.png?branch=master
 
-[coveralls-url]: https://coveralls.io/r/jsBoot/gulp-jsdoc
-[coveralls-image]: https://coveralls.io/repos/jsBoot/gulp-jsdoc/badge.png?branch=master
+[coveralls-url]: https://coveralls.io/r/mlucool/gulp-jsdoc
+[coveralls-image]: https://coveralls.io/repos/mlucool/gulp-jsdoc/badge.png?branch=master
 
-[depstat-url]: https://david-dm.org/jsBoot/gulp-jsdoc
-[depstat-image]: https://david-dm.org/jsBoot/gulp-jsdoc.png
+[depstat-url]: https://david-dm.org/mlucool/gulp-jsdoc
+[depstat-image]: https://david-dm.org/mlucool/gulp-jsdoc.png
 
-[codeclimate-url]: https://codeclimate.com/github/jsBoot/gulp-jsdoc
-[codeclimate-image]: https://codeclimate.com/github/jsBoot/gulp-jsdoc.png
+[codeclimate-url]: https://codeclimate.com/github/mlucool/gulp-jsdoc
+[codeclimate-image]: https://codeclimate.com/github/mlucool/gulp-jsdoc.png

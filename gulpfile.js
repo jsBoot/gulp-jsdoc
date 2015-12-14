@@ -1,103 +1,75 @@
-(function(){
-  'use strict';
+'use strict'; // eslint-disable-line
 
-  // Gulp
-  var gulp = require('gulp');
-  var gutil = require('gulp-util');
+var gulp = require('gulp'),
+    sourcemaps = require('gulp-sourcemaps'),
+    babel = require('gulp-babel'),
+    eslint = require('gulp-eslint'),
+    istanbul = require('gulp-istanbul'),
+    mocha = require('gulp-mocha');
 
-  // Some basic linting
-  var eslint = require('gulp-eslint');
-  var jshint = require('gulp-jshint');
+const srcCode = ['./src/**/*.js'];
+const specs = ['./test/**/*_spec.js'];
+const lintedFiles = ['*.js', './test/**/*.js', '!./test/docs/**/*.js'].concat(srcCode);
 
-  var jsreporter = require('jshint-stylish');
+// Run our own linting task
+gulp.task('lint', function () {
+    throw new Error('Not yet implimented');
+});
 
-  var fs = require('fs');
-  var jsconfig = JSON.parse(fs.readFileSync('./.jshintrc'));
-  var esconfig = JSON.parse(fs.readFileSync('./.eslintrc'));
+// No real need to have a minify set for now, let dev and prod builds be the same
+gulp.task('build', function () {
+    return gulp.src(srcCode)
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('dist'));
+});
 
-  gulp.task('lint', function(){
-    gulp.src([
-      'gulpfile.js',
-      'index.js',
-      'lib/**/*.js'
-    ])
-    .pipe(gutil.combine(
-      eslint(esconfig),
-      eslint.format(),
-      jshint(jsconfig),
-      jshint.reporter(jsreporter)
-    )());
-  });
+gulp.task('lint', function () {
+    return gulp.src(lintedFiles)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
 
+gulp.task('watch-lint', function () {
+    var runSequence = require('run-sequence');
 
+    runSequence('lint', function () {
+        gulp.watch(lintedFiles, ['lint']);
+    });
+});
 
+// We do this over using include/exclude to make everything feel gulp-like!
+gulp.task('doc', function (cb) {
+    var jsdoc = require('./index');
 
-  var template = require('gulp-template');
-  var jsdoc = require('./');
+    var config = require('./jsdocConfig');
+    gulp.src(['README.md'].concat(srcCode), {read: false}).pipe(
+        jsdoc(config, cb)
+    );
+});
 
-  var pkg = require('./package.json');
+gulp.task('pre-test', function () {
+    // Everything file loaded from here uses babel with .babelrc
+    require('babel-core/register'); // https://babeljs.io/docs/usage/require/
 
-  var opts = {
-    showPrivate: true,
-    monospaceLinks: true,
-    cleverLinks: true,
-    outputSourceFiles: true
-  };
+    return gulp.src(srcCode)
+        // Covering files (we use isparta for babel support)
+        .pipe(istanbul({instrumenter: require('isparta').Instrumenter}))
+        // Force `require` to return covered files
+        .pipe(istanbul.hookRequire());
+});
 
-  var tpl = {
-    path: 'ink-docstrap',
-    systemName      : pkg.name,
-    footer          : 'Generated with gulp',
-    copyright       : 'Copyright WebItUp 2014',
-    navType         : 'vertical',
-    theme           : 'journal',
-    linenums        : true,
-    collapseSymbols : false,
-    inverseNav      : false
-  };
+gulp.task('test', ['pre-test'], function () {
+    // Everything file loaded from here uses babel with .babelrc
+    require('babel-core/register'); // https://babeljs.io/docs/usage/require/
 
-  // Amelia
-  // Cerulean
-  // Cosmo
-  // Cyborg
-  // Flatly
-  // Journal
-  // Readable
-  // Simplex
-  // Slate
-  // Spacelab
-  // Spruce
-  // Superhero
-  // United
+    return gulp.src(specs, {read: false})
+        .pipe(mocha())
+        .pipe(istanbul.writeReports())
+        // Enforce a coverage of at least 90%
+        .pipe(istanbul.enforceThresholds({thresholds: {global: 75}}));
+});
 
-  gulp.task('doc-simple', function() {
-    gulp.src([
-      'index.js',
-      'lib/**/*.js'
-    ])
-    // Process source files first
-    .pipe(template({pkg: pkg}))
-    // Then process it
-    .pipe(jsdoc('./doc/jsdoc-simple'));
-  });
-
-  gulp.task('doc-inked', function() {
-    gulp.src([
-      'README.md',
-      'index.js',
-      'lib/**/*.js'
-    ])
-    // Process source files first
-    .pipe(template({pkg: pkg}))
-    // Then parse
-    .pipe(jsdoc.parser(/*{
-      name: pkg.name,
-      description: pkg.description,
-      version: pkg.version,
-      licenses: pkg.licenses || [pkg.license]
-    }*/))
-    // Then generate the documentation and
-    .pipe(jsdoc.generator('./doc/jsdoc-inked', tpl, opts));
-  });
-
-}());
+gulp.task('default', ['build', 'doc']);
