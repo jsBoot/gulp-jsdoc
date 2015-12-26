@@ -1,30 +1,28 @@
-# gulp-jsdoc
+THIS PROJECT IS DEPRECATED
+-------------
+
+[jsdoc](https://github.com/jsdoc3/jsdoc) has recently had a major rewrite to [v3.4](https://github.com/jsdoc3/jsdoc/releases/tag/3.4.0) (support for JSX, ES6). This plugin is no longer being maintained and is incompatible with this change. It is recommended you use [gulp-jsdoc3](https://www.npmjs.com/package/gulp-jsdoc3) instead: https://github.com/mlucool/gulp-jsdoc3
+```shell
+npm uninstall --save-dev gulp-jsdoc
+npm install --save-dev gulp-jsdoc3
+```
+Note: gulp-jsdoc3 is not backwards compatible with this project (gulp-jsdoc). You will have to make minor configuration changes.
+
+# ~~gulp-jsdoc~~
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url] [![Code Climate][codeclimate-image]][codeclimate-url]
 
-> jsdoc plugin for [gulp](https://github.com/wearefractal/gulp)
+> ~~jsdoc plugin for [gulp](https://github.com/wearefractal/gulp)~~
 
-BIG FAT WARNING
+~~TL;DR~~
 -------------
 
-jsdoc is currently (alpha5+) going through important inner modifications.
-Also, jsdoc has an history at doing quesitonable things (certainly, at least in part, due to its desire to support alternative javascript engines like Rhino), including, not limited to, hard copying files into the module folder at runtime (templates), and using non standard require calls and paths.
-Finally, jsdoc really is not meant to be used as a library. It provides a cli, and little more, with no clean/stable library API.
-
-All in all, maintaining a working "true" gulp plugin (one that uses streams and does not simply call a binary) proved to be a very painful task, with ultimately little benefit, as I stopped using jsdoc altogether for my own uses.
-
-For all these reasons, I decided to stop maintaining this plugin, and won't work on it until at least a new jsdoc stable version is released.
-If you still use it and have a PR, I'll review it though.
-
-TL;DR
--------------
-
-Install `gulp-jsdoc` as a development dependency:
+~~Install `gulp-jsdoc` as a development dependency:~~
 
 ```shell
 npm install --save-dev gulp-jsdoc
 ```
 
-Then, use it:
+~~Then, use it:~~
 
 ```javascript
 var jsdoc = require("gulp-jsdoc");
@@ -33,10 +31,10 @@ gulp.src("./src/*.js")
   .pipe(jsdoc('./documentation-output'))
 ```
 
-API
+~~API~~
 -------------
 
-### jsdoc.parser(infos, name)
+### ~~jsdoc.parser(infos, name)~~
 
 ```javascript
 gulp.src("./src/*.js")
@@ -83,7 +81,7 @@ Default: `false`
 jsDoc plugins to use. Example: `['plugins/markdown']`
 
 
-### jsdoc.generator(destination, template, options)
+### ~~jsdoc.generator(destination, template, options)~~
 
 ```javascript
 gulp.src("./somewhere/jsdoc.json")
@@ -151,7 +149,7 @@ You may optionnally override default jsdoc behavior with this object:
  ```
 
 
-### jsdoc(destination, template, infos, options)
+### ~~jsdoc(destination, template, infos, options)~~
 
 ```javascript
 gulp.src(["./src/*.js", "README.md"])
@@ -167,7 +165,7 @@ gulp.src(["./src/*.js", "README.md"])
 ```
 
 
-Limitations
+~~Limitations~~
 -------------
 
 Only the parser is really using streams. While the generator will read from the result of the parser, it will also read and write templates files synchronously on its own.
@@ -180,7 +178,6 @@ Also, the following are currently not supported:
  * sourcing configuration from jsdoc.conf files
 
 If you have a use-case that you can't do with straight gulp in a better way, please say so.
-
 License
 -------------
 
