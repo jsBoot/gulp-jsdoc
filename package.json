@@ -36,10 +36,11 @@
     "chalk": "~0.4.0",
     "text-table": "~0.2.0",
     "vinyl-fs": "~0.3.0",
-    "jsdoc": "3.3.0-alpha5",
+    "jsdoc": "3.3.0-alpha9",
     "taffydb": "~2.7.2",
     "ink-docstrap": "~0.4.5",
     "wrench": "~1.5.6",
+    "requizzle": "^0.2.0",
     "marked": "~0.3.1"
   },
   "devDependencies": {

@@ -17,4 +17,7 @@ coverage
 # Oldies
 *xxx*
 
+# ignore
+doc
+
 /*.log
